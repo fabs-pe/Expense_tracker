@@ -3,10 +3,10 @@
 This is backend will create an API for users to log expenses and wages by category, generate reports and view weekly and monthly statistics.
 
 There will be two roles:
-- Parent
-- Child
+- Adult
+- Kid
 
-## Parent Role
+## Adult Role
 
 This role will have full CRUD rights. As a parent you can:
 
@@ -17,7 +17,7 @@ This role will have full CRUD rights. As a parent you can:
 - add, edit and  delete expenses
 - generate reports
 
-## Child Role
+## Kid Role
 
 This role will allow the child to:
 
