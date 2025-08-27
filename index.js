@@ -12,6 +12,14 @@ mongoose.connect('mongodb://localhost:27017/expense_tracker', {
 .catch(err => console.log(err));
 
 // Sample endpoint
-app.get('/', (req, res) => { res.send('API Running'); });
+// app.get('/', (req, res) => { res.send('API Running'); });
 
 app.listen(3000, () => { console.log('Server started on port 3000'); });
+
+
+// welcome route 
+app.get("/", (request,response) =>{
+    response.json({
+        message: "Expense Tracker"
+    })
+})
