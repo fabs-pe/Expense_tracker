@@ -1,24 +1,31 @@
-const express = require('express')
+
+const express = require('express');
 const app = express();
+const expensesRouter = require('./routes/expenses');
 
-// configure API DAta recieving and sending
+// Middleware
 app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 
-// welcome route
-app.get ("/", (request,response)=>{
-    response.json({
-        message: "Expense Tracker"
-    })
-})
+// Routes
+app.use('/expenses', expensesRouter); // mount expenses router
 
-// 404 route
-app.get("*", (request, response) =>{
-    response.status(404).json({
-        message: "No route with that path!"
-    });
+// Welcome route
+app.get('/', (req, res) => {
+  res.json({ message: 'Expense Tracker API' });
 });
 
-module.exports={
-    app
-}
+//user route 
+const UserController = require('./routes/users');
+app.use("/users", UserController);
+
+// expense route
+const ExpenseController = require('./routes/expenses');
+app.use("/expenses", ExpenseController)
+
+// 404 route
+app.get('*', (req, res) => {
+  res.status(404).json({ message: 'No route with that path!' });
+});
+
+module.exports = app;

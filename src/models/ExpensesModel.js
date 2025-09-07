@@ -12,7 +12,7 @@ const ExpenseSchema = new Schema({
     },
 
     category:{
-        type:mongoose.Schemma.ObjectId,
+        type:mongoose.Schema.ObjectId,
         ref: 'Category',
         required: true
 
@@ -49,3 +49,9 @@ const ExpenseSchema = new Schema({
     },
 
 })
+
+const Expense= mongoose.model('Expense', ExpenseSchema);
+
+module.exports={
+    Expense
+}
