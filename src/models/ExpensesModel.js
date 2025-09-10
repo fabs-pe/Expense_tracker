@@ -12,7 +12,7 @@ const ExpenseSchema = new Schema({
     },
 
     category:{
-        type:mongoose.Schema.ObjectId,
+        type:Schema.Types.ObjectId,
         ref: 'Category',
         required: true
 

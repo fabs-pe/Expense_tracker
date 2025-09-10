@@ -1,4 +1,4 @@
-// src/routes/expenses.js
+
 const express = require('express');
 const { Expense } = require('../models/ExpensesModel');
 const router = express.Router();
@@ -15,10 +15,10 @@ router.get('/', async (req, res) => {
 
 
 // POST create a new expense
-router.post('/', (req, res) => {
-  const { title, amount } = req.body;
-  res.json({ message: 'Expense created', data: { title, amount } });
-});
+// router.post('/', (req, res) => {
+//   const { title, amount } = req.body;
+//   res.json({ message: 'Expense created', data: { title, amount } });
+// });
 
 // GET single expense by id
 router.get('/:id', (req, res) => {

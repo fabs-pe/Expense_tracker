@@ -5,59 +5,84 @@ const { databaseConnect } = require('./src/database');
 const { Expense } = require('./src/models/ExpensesModel');
 const { Category } = require('./src/models/categoryModel');
 
-
 async function seed() {
   try {
     await databaseConnect();
 
-    await User.create([
-  {
-    userName: "Fabian",
-    email: "fabian@email.com",
-    password: "password13",
-    groupName: "test11groupe2"
-  },
-  {
-    userName: "Alice",
-    email: "alice@email.com",
-    password: "password42",
-    groupName: "devgroup12e",
-    role: "adult"
-  },
-  {
-    userName: "Matisse",
-    email: "matisse@email.com",
-    password: "password13",
-    groupName: "9888112e",
-    role: "adult"
-  }
-]);
+    // Clear existing data
+    await User.deleteMany({});
+    await Category.deleteMany({});
+    await Expense.deleteMany({});
 
-    await Category.create ([
-        {
-         categoryName: "Car",
-         categoryDesc: "all car expenses"   
-        }
-        
-
+    // Create multiple users in one go
+    const users = await User.insertMany([
+      {
+        userName: "Fabian",
+        email: "fabian@email.com",
+        password: "password13",
+        groupName: "test11groupe2"
+      },
+      {
+        userName: "Alice",
+        email: "alice@email.com",
+        password: "password42",
+        groupName: "devgroup12e",
+        role: "adult"
+      },
+      {
+        userName: "Matisse",
+        email: "matisse@email.com",
+        password: "password13",
+        groupName: "9888112e",
+        role: "adult"
+      }
     ]);
 
-    await Expense.create ([
-        {
-            user: User._id,
-            category: "Car",
-            expenseName: "petrol",
-            description: "petrol to school",
-            amount: "45",
-            date: "4/12/25"
-        }
+    // Create categories
+    const categories = await Category.insertMany([
+      {
+        categoryName: "Car",
+        categoryDesc: "All car expenses"
+      },
+      {
+        categoryName: "Groceries",
+        categoryDesc: "all food and beverage bought from shops"
+      },
+      {
+        categoryName: "entertainment",
+        categoryDesc:"going out not including restaurants"
+      },
+      {
+        categoryName: "Alcohol",
+        categoryDesc:" from the"
+      }
     ]);
 
-    console.log("✅ User created:", newUser);
+    // Create expense linked to  users + categories
+    const expenses = await Expense.insertMany([
+      {
+        user: users[0]._id,
+        category: categories[0]._id,
+        expenseName: "Petrol",
+        description: "Petrol to school",
+        amount: 45,
+        date: new Date("2025-04-12") // better to store dates properly
+      },
+      {
+        user: users[1]._id,
+        category: categories[1]._id,
+        expenseName: "Food",
+        description: "food for dinner on tueday",
+        amount: 100,
+        date: new Date("2025-01-02")
+      }
+    ]);
+
+    console.log("✅ Database seeded successfully!");
   } catch (err) {
     console.error("❌ Error seeding database:", err);
   } finally {
-    mongoose.connection.close(); // 👈 closes the DB connection
+    mongoose.connection.close();
   }
 }
 

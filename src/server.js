@@ -1,14 +1,14 @@
 
 const express = require('express');
 const app = express();
-const expensesRouter = require('./routes/expenses');
+// const expensesRouter = require('./routes/expenses');
 
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
-app.use('/expenses', expensesRouter); // mount expenses router
+// app.use('/expenses', expensesRouter); // mount expenses router
 
 // Welcome route
 app.get('/', (req, res) => {
