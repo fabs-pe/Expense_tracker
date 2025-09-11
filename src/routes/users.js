@@ -28,6 +28,32 @@ router.get('/', async (req, res) => {
   }
 });
 
+// GET user by id
+router.get('/one/:id', async (req, res) => {
+  try {
+    const result = await User.findById(req.params.id); 
+    if (!result) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.json({ user: result });
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching user', error: err.message });
+  }
+});
+
+// GET user by userName 
+router.get('/one/:userName', async(req, res) => {
+    try{
+        const result = await User.findOne(req.params.userName);
+        if(!result){
+            return res.status(404).json({message: "User not found" });
+        }
+        res.json({user: result});
+    } catch (err) {
+        res.status(500).json({message: "Error fetching user", error : err.message });
+    }
+})
+
 
 // POST to users/login
 
