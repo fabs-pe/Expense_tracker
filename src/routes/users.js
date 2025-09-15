@@ -42,15 +42,30 @@ router.get('/one/:id', async (req, res) => {
 });
 
 // GET user by userName 
-router.get('/one/:userName', async(req, res) => {
+router.get('/name/:userName', async (req, res) => {
+  try {
+    const result = await User.findOne({ userName: req.params.userName });
+    if (!result) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.json({ user: result });
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching user", error: err.message });
+  }
+});
+
+
+// GET user by groupName
+router.get('/group/:groupName', async (req, res) => {
     try{
-        const result = await User.findOne(req.params.userName);
-        if(!result){
-            return res.status(404).json({message: "User not found" });
+        const result = await User.find({groupName: req.params.groupName});
+        if(!result.length){
+            return res.status(404).json({message: "Group Name Does Not Exisit"})   
         }
         res.json({user: result});
     } catch (err) {
-        res.status(500).json({message: "Error fetching user", error : err.message });
+        res.status(500).json({message: "Error fetching Group", error: err.message});
+        
     }
 })
 

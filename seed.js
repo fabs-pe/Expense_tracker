@@ -21,7 +21,7 @@ async function seed() {
         userName: "Fabian",
         email: "fabian@email.com",
         password: "password13",
-        groupName: "test11groupe2"
+        groupName: "devgroup12e"
       },
       {
         userName: "Alice",
