@@ -14,16 +14,21 @@ router.get('/', async (req, res) => {
 });
 
 
-// POST create a new expense
-// router.post('/', (req, res) => {
-//   const { title, amount } = req.body;
-//   res.json({ message: 'Expense created', data: { title, amount } });
-// });
-
 // GET single expense by id
-router.get('/:id', (req, res) => {
-  const { id } = req.params;
-  res.json({ message: `Get expense ${id}` });
-});
+router.get('/:id', async (req, res) => {
+  try{
+    const result = await Expense.findById(req.params.id)
+    if(!result){
+      return res.status(404).json({message: "No Expenses Found"});
+    }
+    res.json({expense: result})
+  } catch (err){
+    res.status(500).json({message: "Error Fetching Expense", error: err.message});
+  }
+})
+
+// GET expenses by catergory
+// GET expenses by expenseName
+// GET expense by date
 
 module.exports = router;
