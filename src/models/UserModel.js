@@ -47,7 +47,7 @@ UserSchema.pre(
     'save',
     async function (next){
         const user = this;
-        // if password wasnt changed toplaintext, skip to next function
+        // if password wasnt changed to plain text, skip to next function
         if (!user.isModified('password')) return next();
         // if password was changed, assume it was to plaintext and hash it
         const hash = await bcrypt.hash(this.password, 10);

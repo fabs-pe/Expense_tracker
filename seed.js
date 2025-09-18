@@ -76,6 +76,22 @@ async function seed() {
         description: "food for dinner on tueday",
         amount: 100,
         date: new Date("2025-01-02")
+      },
+      {
+        user: users[0]._id,
+        category: categories[1]._id,
+        expenseName: "Lunch Food",
+        description: "Food for the week lunches",
+        amount: "150",
+        date: new Date("2025-03-13")
+      },
+      {
+        user: users[2]._id,
+        category: categories[3]._id,
+        expenseName: "Long Weekend",
+        description: "all beverages for the weekend",
+        amount: 400,
+        date: new Date("2025-01-02")
       }
     ]);
 
