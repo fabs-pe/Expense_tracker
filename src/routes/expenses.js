@@ -267,5 +267,24 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+
+
+// ||||||||||||||||||||||
+//  POST ENDPOINT
+// ||||||||||||||||||||||
+
+router.post("register", async (request, response) => {
+  try{
+    let newExpense = await Expense.create(request.body)
+    response.status(201).json({message: "Expense rcreated successfully!!"})
+  
+    response.json({expense: newExpense});
+  } catch (err) {
+    response.status(500).json({message: "An error ocurred and expenses was not created", error: err.message})
+  }
+});
+
+
 module.exports = router;
+
 
