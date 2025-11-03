@@ -276,7 +276,7 @@ router.get('/:id', async (req, res) => {
 router.post("register", async (request, response) => {
   try{
     let newExpense = await Expense.create(request.body)
-    response.status(201).json({message: "Expense rcreated successfully!!"})
+    response.status(201).json({message: "Expense created successfully!!"})
   
     response.json({expense: newExpense});
   } catch (err) {
